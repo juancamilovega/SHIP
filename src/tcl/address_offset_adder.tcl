@@ -1,0 +1,59 @@
+#Address Offset Applicator
+
+#create the blocks
+
+create_bd_cell -type module -reference add_top_32_addr Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0
+create_bd_cell -type module -reference add_top_32_addr Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2
+create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 Shell/shared_memory_subsystem/address_offset_application/xlconstant_0
+
+#configure the blocks
+
+set_property -dict [list CONFIG.M_ID_WIDTH {1} CONFIG.DATA_WIDTH {128}] [get_bd_cells Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0]
+set_property -dict [list CONFIG.M_ID_WIDTH {1} CONFIG.DATA_WIDTH {128}] [get_bd_cells Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1]
+set_property -dict [list CONFIG.NUM_SI {1} CONFIG.NUM_MI {1} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5}] [get_bd_cells Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1]
+set_property -dict [list CONFIG.NUM_SI {1} CONFIG.NUM_MI {1} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5}] [get_bd_cells Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2]
+set_property -dict [list CONFIG.CONST_WIDTH {32} CONFIG.CONST_VAL {0xb}] [get_bd_cells Shell/shared_memory_subsystem/address_offset_application/xlconstant_0]
+
+#interface connections
+
+connect_bd_intf_net [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/read_in] -boundary_type upper [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/S00_AXI]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/M00_AXI] [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0/s_axi]
+connect_bd_intf_net [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/read_out] [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0/m_axi]
+connect_bd_intf_net [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/write_in] -boundary_type upper [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/S00_AXI]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/M00_AXI] [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1/s_axi]
+connect_bd_intf_net [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/write_out] [get_bd_intf_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1/m_axi]
+
+#other connections
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0/aclk]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1/aclk]
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0/aresetn]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1/aresetn]
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/xlconstant_0/dout] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_0/TOP_ADDR]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/xlconstant_0/dout] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/add_top_32_addr_1/TOP_ADDR]
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/ACLK]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/S00_ACLK]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/M00_ACLK]
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/ACLK]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/S00_ACLK]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/M00_ACLK]
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/ARESETN]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/S00_ARESETN]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT1/M00_ARESETN]
+
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/ARESETN]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/S00_ARESETN]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/PS_DDR_INTERCONNECT2/M00_ARESETN]
+
+#perform address functions
+assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW }]
+assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_QSPI }]
+assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM }]
+assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH }]

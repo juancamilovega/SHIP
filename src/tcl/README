@@ -1,0 +1,9 @@
+These are the tcl scripts that automate the various vivado functions. 
+
+hls_builder.tcl is used to compile all the hls cores. A temporary file called Namefile.txt is used by the makefile to tell this tcl which core to make.
+
+shell.tcl is the top level function for making the SHIP Hardware project and calls on the other functions to make each subcomponent
+
+ps_pl_config.tcl is a special tcl sourced by shell.tcl that is used to configure the ultrascale+ mpsoc ip block. To use it, the tcl must be sourced which stores the preset under the variable name SHIP_hardware. The core can be configured with the command: set_property -dict [apply_preset SHIP_hardware] [get_bd_cells <core name>].
+
+The format of all the other tcl scripts is first they create the blocks inside the hierarchy. Then if applicable it adds the ports to all hierarchy blocks it created. Then it configures the blocks. Then it connects the interfaces, and finally it connects the native ports. For hierarchies with memory mapped blocks it then performs the addressing.

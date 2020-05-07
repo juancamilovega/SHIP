@@ -20,9 +20,11 @@ bit_file:
 	vivado -mode tcl -source src/tcl/make_output.tcl -nolog -nojournal
 
 binary:
+	if [ ! -d output_products ]; then	mkdir output_products; fi
 	bootgen -arch zynqmp -image src/compilation_files/ship.bif -o output_products/storage.bin -w
 
 device_tree:
+	if [ ! -d output_products ]; then	mkdir output_products; fi
 	dtc -O dtb -o output_products/storage.dtbo -b 0 -@ src/compilation_files/ship.dtsi
 
 clean:

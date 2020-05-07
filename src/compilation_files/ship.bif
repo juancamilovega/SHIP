@@ -1,0 +1,4 @@
+all:
+{
+        [destination_device = pl] output_products/storage.bit /*should be the name of your bitstream*/
+}

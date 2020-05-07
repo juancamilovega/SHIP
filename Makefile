@@ -1,4 +1,4 @@
-all: hls gulf_stream storage_server
+all: hls gulf_stream storage_server device_tree bit_file binary
 
 hls: 
 	$(MAKE) -C ip_repo/hls_ips
@@ -15,7 +15,18 @@ storage_server:
 	rm -rf SHIP_hardware
 	vivado -mode tcl -source src/tcl/ship.tcl -nolog -nojournal
 
+bit_file:
+	if [ ! -d output_products ]; then	mkdir output_products; fi
+	vivado -mode tcl -source src/tcl/make_output.tcl -nolog -nojournal
+
+binary:
+	bootgen -arch zynqmp -image src/compilation_files/ship.bif -o output_products/storage.bin -w
+
+device_tree:
+	dtc -O dtb -o output_products/storage.dtbo -b 0 -@ src/compilation_files/ship.dtsi
+
 clean:
 	$(MAKE) -C ip_repo/hls_ips clean
 	rm -rf repos
 	rm -rf SHIP_hardware
+	rm -rf output_products

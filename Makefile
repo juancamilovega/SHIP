@@ -1,5 +1,7 @@
 all: set_parameters hls gulf_stream storage_server bit_file binary device_tree
 
+no_outputs: set_parameters hls gulf_stream storage_server
+
 hls: 
 	$(MAKE) -C ip_repo/hls_ips
 

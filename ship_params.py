@@ -93,7 +93,7 @@ def mac_parser(input_str):
     return (final_mac, 0)
 
 
-print("Enter the ip address and subnet mask of the storage server as 'x.x.x.x/x' (eg '10.0.0.2/24') (the quotes are necessary):")
+print("Enter the ip address and subnet mask of the storage server as x.x.x.x/x (eg 10.0.0.2/24):")
 
 ret_val = -1
 ip = ""
@@ -114,7 +114,7 @@ f=open('subnet.txt','w')
 
 f.write(subnet)
 
-print("Enter the address of the gateway as 'x.x.x.x' (eg '10.0.0.1') (the quotes are necessary):")
+print("Enter the address of the gateway as x.x.x.x (eg 10.0.0.1):")
 
 ret_val = -1
 ip = ""
@@ -131,7 +131,7 @@ f.write(ip)
 
 f.close()
 
-print("Enter the mac address as either a hex number or mac address format (AABBCCDDEEFF or '0xAABBCCDDEEFF' or 'AA:BB:CC:DD:EE:FF' all work) (the quotes are necessary):")
+print("Enter the mac address as either a hex number or mac address format (AABBCCDDEEFF or 0xAABBCCDDEEFF or AA:BB:CC:DD:EE:FF all work):")
 
 ret_val = -1
 ip = ""

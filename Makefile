@@ -1,11 +1,12 @@
 all: set_parameters hls gulf_stream storage_server bit_file binary device_tree
 
-no_outputs: set_parameters hls gulf_stream storage_server
+no_outputs: set_half_parameters hls gulf_stream storage_server
 
 hls: 
 	$(MAKE) -C ip_repo/hls_ips
 
-
+set_half_parameters:
+	python ship_params.py
 
 gulf_stream:
 	rm -rf repos/GULF-Stream

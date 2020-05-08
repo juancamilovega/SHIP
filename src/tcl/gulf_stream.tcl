@@ -44,9 +44,11 @@ set_property -dict [list CONFIG.FIFO_DEPTH {512} CONFIG.IS_ACLK_ASYNC {1}] [get_
 set_property -dict [list CONFIG.FIFO_DEPTH {1024} CONFIG.IS_ACLK_ASYNC {1} CONFIG.TDATA_NUM_BYTES {81}] [get_bd_cells roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1]
 set_property -dict [list CONFIG.NUM_PORTS {7}] [get_bd_cells roce_sector/udp_parser/GULF_Stream/sideband_data_concat]
 
-set_property -dict [list CONFIG.IP_ADDR $ip_addr CONFIG.GATEWAY $gateway_addr CONFIG.MAC_ADDR $mac_addr CONFIG.NETMASK $subnet] [get_bd_cells roce_sector/udp_parser/GULF_Stream/GULF_Stream]
+set_property -dict [list CONFIG.HAS_AXIL {true} CONFIG.IP_ADDR $ip_addr CONFIG.GATEWAY $gateway_addr CONFIG.MAC_ADDR $mac_addr CONFIG.NETMASK $subnet] [get_bd_cells roce_sector/udp_parser/GULF_Stream/GULF_Stream]
 
 #connect Interfaces
+
+connect_bd_intf_net [get_bd_intf_pins roce_sector/udp_parser/GULF_Stream/Gulf_Stream_config] [get_bd_intf_pins roce_sector/udp_parser/GULF_Stream/GULF_Stream/s_axictl]
 
 connect_bd_intf_net [get_bd_intf_pins roce_sector/udp_parser/GULF_Stream/network_tx] [get_bd_intf_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_0/S_AXIS]
 connect_bd_intf_net [get_bd_intf_pins roce_sector/udp_parser/GULF_Stream/network_rx] [get_bd_intf_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1/M_AXIS]
@@ -69,7 +71,11 @@ connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/ethernet/network_
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/ethernet/network_clocks] [get_bd_pins roce_sector/udp_parser/GULF_Stream/network_reset_sync/slowest_sync_clk]
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/ethernet/network_clocks] [get_bd_pins roce_sector/udp_parser/GULF_Stream/GULF_Stream/clk]
 
+connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/ethernet/network_clocks] [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_network]
+
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/network_reset_sync/interconnect_aresetn] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1/s_axis_aresetn]
+
+connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/network_reset_sync/interconnect_aresetn] [get_bd_pins roce_sector/udp_parser/GULF_Stream/reset_network]
 
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/network_reset_sync/peripheral_reset] [get_bd_pins roce_sector/udp_parser/GULF_Stream/GULF_Stream/rst]
 
@@ -111,3 +117,9 @@ connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/seven_bit_zero/do
 
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/sideband_data_concat/dout] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1/s_axis_tdata]
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/GULF_Stream/payload_to_user_valid] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1/s_axis_tvalid]
+
+#configure addresses
+
+assign_bd_address [get_bd_addr_segs {roce_sector/udp_parser/GULF_Stream/GULF_Stream/s_axictl/reg0 }]
+set_property offset 0x00A0060000 [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/Data/SEG_GULF_Stream_reg0}]
+

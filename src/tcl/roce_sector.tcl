@@ -38,6 +38,8 @@ create_bd_intf_pin -mode Slave -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 roce_sector/udp_parser/gt_tx
 
+create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 roce_sector/udp_parser/Gulf_Stream_config
+
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 roce_sector/udp_parser/init
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 roce_sector/udp_parser/gt_ref
 
@@ -55,6 +57,9 @@ create_bd_pin -dir I roce_sector/udp_parser/clk_266mhz
 create_bd_pin -dir I roce_sector/udp_parser/reset_266mhz
 create_bd_pin -dir I roce_sector/udp_parser/global_reset
 create_bd_pin -dir I -from 16 -to 0 roce_sector/udp_parser/roce_port
+
+create_bd_pin -dir O roce_sector/udp_parser/clk_network
+create_bd_pin -dir O roce_sector/udp_parser/reset_network
 
 #configure the cells
 
@@ -76,6 +81,8 @@ connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/udp_parse
 connect_bd_intf_net [get_bd_intf_pins roce_sector/rx_non_roce_data] -boundary_type upper [get_bd_intf_pins roce_sector/udp_parser/rx_nr_data]
 connect_bd_intf_net [get_bd_intf_pins roce_sector/rx_non_roce_meta] -boundary_type upper [get_bd_intf_pins roce_sector/udp_parser/rx_nr_meta]
 
+connect_bd_intf_net [get_bd_intf_pins roce_sector/Gulf_Stream_config] -boundary_type upper [get_bd_intf_pins roce_sector/udp_parser/Gulf_Stream_config]
+
 connect_bd_intf_net [get_bd_intf_pins roce_sector/read_flags] -boundary_type upper [get_bd_intf_pins roce_sector/roce_tx/read_flags]
 connect_bd_intf_net [get_bd_intf_pins roce_sector/read_aeth] -boundary_type upper [get_bd_intf_pins roce_sector/roce_tx/read_aeth]
 connect_bd_intf_net [get_bd_intf_pins roce_sector/read_payload] -boundary_type upper [get_bd_intf_pins roce_sector/roce_tx/read_payload]
@@ -90,6 +97,10 @@ connect_bd_intf_net [get_bd_intf_pins roce_sector/write_flags] -boundary_type up
 connect_bd_intf_net [get_bd_intf_pins roce_sector/write_data] -boundary_type upper [get_bd_intf_pins roce_sector/roce_rx/write_data]
 
 #other connections
+
+connect_bd_net [get_bd_pins roce_sector/clk_network] [get_bd_pins roce_sector/udp_parser/clk_network]
+
+connect_bd_net [get_bd_pins roce_sector/reset_network] [get_bd_pins roce_sector/udp_parser/reset_network]
 
 connect_bd_net [get_bd_pins roce_sector/clk_266mhz] [get_bd_pins roce_sector/roce_tx/clk_266mhz]
 connect_bd_net [get_bd_pins roce_sector/clk_266mhz] [get_bd_pins roce_sector/roce_rx/clk_266mhz]

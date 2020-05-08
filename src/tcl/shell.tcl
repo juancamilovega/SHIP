@@ -93,7 +93,7 @@ create_bd_pin -dir I Shell/shared_memory_subsystem/reset_266mhz
 
 set_property -dict [list CONFIG.NUM_SI {5} CONFIG.NUM_MI {1} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.S00_HAS_REGSLICE {1} CONFIG.M00_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_DDR_INTERCONNECT]
 set_property -dict [list CONFIG.NUM_PORTS {6}] [get_bd_cells Shell/ps_interrupts]
-set_property -dict [list CONFIG.NUM_MI {4} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M01_HAS_REGSLICE {1} CONFIG.M02_HAS_REGSLICE {1} CONFIG.M03_HAS_REGSLICE {1} CONFIG.S00_HAS_REGSLICE {3} CONFIG.M00_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_Master]
+set_property -dict [list CONFIG.NUM_MI {5} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M01_HAS_REGSLICE {1} CONFIG.M02_HAS_REGSLICE {1} CONFIG.M03_HAS_REGSLICE {1} CONFIG.S00_HAS_REGSLICE {3} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M04_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_Master]
 
 #connect the interfaces
 
@@ -133,8 +133,13 @@ connect_bd_intf_net [get_bd_intf_pins Shell/sw_request_rx] -boundary_type upper 
 connect_bd_intf_net [get_bd_intf_pins Shell/mem_transfer_out] -boundary_type upper [get_bd_intf_pins Shell/pl_ps_bridge/mem_transfer]
 
 connect_bd_intf_net [get_bd_intf_pins Shell/tx_interpreter_config] -boundary_type upper [get_bd_intf_pins Shell/PS_Master/M03_AXI]
+connect_bd_intf_net [get_bd_intf_pins Shell/Gulf_Stream_config] -boundary_type upper [get_bd_intf_pins Shell/PS_Master/M04_AXI]
 
 #other connections
+
+connect_bd_net [get_bd_pins Shell/clk_network] [get_bd_pins Shell/PS_Master/M04_ACLK]
+
+connect_bd_net [get_bd_pins Shell/reset_network] [get_bd_pins Shell/PS_Master/M04_ARESETN]
 
 connect_bd_net [get_bd_pins Shell/main_shell/clk_266mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/ACLK] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/clk_266mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/M00_ACLK] -boundary_type upper

@@ -47,6 +47,8 @@ create_bd_pin -dir O -from 3 -to 0 Shell/pci_exp_txp
 create_bd_pin -dir O Shell/pl_reset
 create_bd_pin -dir O Shell/reset_266mhz
 create_bd_pin -dir O Shell/clk_266mhz
+create_bd_pin -dir I Shell/clk_network
+create_bd_pin -dir I Shell/reset_network
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/tx_non_roce_meta
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/tx_non_roce_data
@@ -57,6 +59,7 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/PS
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/malloc_port
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/tx_interpreter_config
+create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/Gulf_Stream_config
 
 connect_bd_intf_net [get_bd_intf_ports pcie_clk] -boundary_type upper [get_bd_intf_pins Shell/pcie_clk]
 
@@ -77,6 +80,7 @@ create_bd_intf_pin -mode Slave -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0
 create_bd_intf_pin -mode Master -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 roce_sector/gt_tx
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 roce_sector/tx_interpreter_config
+create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 roce_sector/Gulf_Stream_config
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/rx_non_roce_meta
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/rx_non_roce_data
@@ -93,6 +97,9 @@ create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sect
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/read_payload
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/ack_flags
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/ack
+
+create_bd_pin -dir O roce_sector/clk_network
+create_bd_pin -dir O roce_sector/reset_network
 
 create_bd_pin -dir I roce_sector/clk_266mhz
 create_bd_pin -dir I roce_sector/reset_266mhz
@@ -139,6 +146,7 @@ set_property -dict [list CONFIG.CONST_WIDTH {32} CONFIG.CONST_VAL {0}] [get_bd_c
 connect_bd_intf_net [get_bd_intf_ports gt_ref] -boundary_type upper [get_bd_intf_pins roce_sector/gt_ref]
 connect_bd_intf_net [get_bd_intf_ports init] -boundary_type upper [get_bd_intf_pins roce_sector/init]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/tx_interpreter_config] [get_bd_intf_pins Shell/tx_interpreter_config]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/Gulf_Stream_config] [get_bd_intf_pins Shell/Gulf_Stream_config]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/tx_non_roce_data] [get_bd_intf_pins Shell/tx_non_roce_data]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/tx_non_roce_meta] [get_bd_intf_pins Shell/tx_non_roce_meta]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/read_flags] [get_bd_intf_pins read_sector/read_flags]
@@ -177,6 +185,9 @@ connect_bd_net [get_bd_ports pci_exp_rxn] [get_bd_pins Shell/pci_exp_rxn]
 connect_bd_net [get_bd_ports pci_exp_rxp] [get_bd_pins Shell/pci_exp_rxp]
 connect_bd_net [get_bd_ports pci_exp_txn] [get_bd_pins Shell/pci_exp_txn]
 connect_bd_net [get_bd_ports pci_exp_txp] [get_bd_pins Shell/pci_exp_txp]
+
+connect_bd_net [get_bd_pins roce_sector/clk_network] [get_bd_pins Shell/clk_network] -boundary_type upper
+connect_bd_net [get_bd_pins roce_sector/reset_network] [get_bd_pins Shell/reset_network] -boundary_type upper
 
 connect_bd_net [get_bd_pins base_address/dout] [get_bd_pins read_sector/base_address]
 connect_bd_net [get_bd_pins base_address/dout] [get_bd_pins write_sector/base_address]

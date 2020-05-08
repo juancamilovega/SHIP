@@ -3,6 +3,8 @@ all: hls gulf_stream storage_server device_tree bit_file binary
 hls: 
 	$(MAKE) -C ip_repo/hls_ips
 
+
+
 gulf_stream:
 	rm -rf repos/GULF-Stream
 	mkdir repos

@@ -1,3 +1,20 @@
+#get parameters
+set infile [open "ip_addr.txt" r]
+set ip_addr [gets $infile]
+close $infile
+
+set infile [open "gateway_addr.txt" r]
+set gateway_addr [gets $infile]
+close $infile
+
+set infile [open "mac_addr.txt" r]
+set mac_addr [gets $infile]
+close $infile
+
+set infile [open "subnet.txt" r]
+set subnet [gets $infile]
+close $infile
+
 #set variables
 
 set project_dir [file dirname [file dirname [file dirname [file normalize [info script]]]]]

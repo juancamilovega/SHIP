@@ -44,7 +44,7 @@ set_property -dict [list CONFIG.FIFO_DEPTH {512} CONFIG.IS_ACLK_ASYNC {1}] [get_
 set_property -dict [list CONFIG.FIFO_DEPTH {1024} CONFIG.IS_ACLK_ASYNC {1} CONFIG.TDATA_NUM_BYTES {81}] [get_bd_cells roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1]
 set_property -dict [list CONFIG.NUM_PORTS {7}] [get_bd_cells roce_sector/udp_parser/GULF_Stream/sideband_data_concat]
 
-set_property -dict [list CONFIG.IP_ADDR {0x000A0102e9} CONFIG.GATEWAY {0x0A010200} CONFIG.MAC_ADDR {0x203AB490E503}] [get_bd_cells roce_sector/udp_parser/GULF_Stream/GULF_Stream]
+set_property -dict [list CONFIG.IP_ADDR {$ip_addr} CONFIG.GATEWAY {$gateway_addr} CONFIG.MAC_ADDR {$mac_addr} CONFIG.NETMASK {$subnet}] [get_bd_cells roce_sector/udp_parser/GULF_Stream/GULF_Stream]
 
 #connect Interfaces
 

@@ -18,6 +18,8 @@ def parse_ip (input_str):
 
 def parse_ip_subnet (input_str):
     split_ip = input_str.split('/')
+    if (len(split_ip) !=2):
+        return ('','',-1)
     a,b = parse_ip(split_ip[0])
     if (b!= 0):
         return ('','',-1)

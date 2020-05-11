@@ -44,11 +44,11 @@ device_tree:
 
 clean:
 	$(MAKE) -C ip_repo/hls_ips clean
-	rm ip_addr.txt
-	rm gateway_addr.txt
-	rm mac_addr.txt
-	rm subnet.txt
-	rm num_cores.txt
+	rm -f ip_addr.txt
+	rm -f gateway_addr.txt
+	rm -f mac_addr.txt
+	rm -f subnet.txt
+	rm -f num_cores.txt
 	rm -rf repos
 	rm -rf SHIP_hardware
 	rm -rf output_products

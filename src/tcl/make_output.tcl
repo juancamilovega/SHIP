@@ -8,6 +8,8 @@ open_project $project_dir/SHIP_hardware/SHIP_hardware.xpr
 
 set_property strategy Performance_Explore [get_runs impl_1]
 
+update_compile_order -fileset sources_1
+
 launch_runs impl_1 -to_step write_bitstream -jobs $cores
 
 wait_on_run impl_1

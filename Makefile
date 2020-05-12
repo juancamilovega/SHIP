@@ -2,8 +2,17 @@ all: set_parameters hls gulf_stream storage_server bit_file binary device_tree
 
 no_outputs: set_half_parameters hls gulf_stream storage_server
 
-hls: 
+driver_only: driver_hls gulf_stream driver_proj
+
+hls:
+	$(MAKE) -C ip_repo/driver_hls_ips
 	$(MAKE) -C ip_repo/hls_ips
+
+ship_hls:
+	$(MAKE) -C ip_repo/hls_ips
+
+driver_hls:
+	$(MAKE) -C ip_repo/driver_hls_ips
 
 set_half_parameters:
 	python ship_params.py
@@ -19,6 +28,10 @@ gulf_stream:
 set_parameters:
 	python ship_params.py
 	python num_cores_only.py
+
+driver_proj:
+	rm -rf SHIP_driver
+	vivado -mode tcl -source src/tcl/driver.tcl -nolog -nojournal
 
 storage_server:
 	rm -rf SHIP_hardware
@@ -44,6 +57,7 @@ device_tree:
 
 clean:
 	$(MAKE) -C ip_repo/hls_ips clean
+	$(MAKE) -C ip_repo/driver_hls_ips clean
 	rm -f ip_addr.txt
 	rm -f gateway_addr.txt
 	rm -f mac_addr.txt
@@ -51,4 +65,5 @@ clean:
 	rm -f num_cores.txt
 	rm -rf repos
 	rm -rf SHIP_hardware
+	rm -rf SHIP_driver
 	rm -rf output_products

@@ -20,8 +20,8 @@ connect_bd_net [get_bd_pins Shell/main_shell/proc_sys_reset_1/slowest_sync_clk] 
 connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_resetn0] [get_bd_pins Shell/main_shell/proc_sys_reset_1/ext_reset_in]
 connect_bd_net [get_bd_pins Shell/main_shell/proc_sys_reset_0/ext_reset_in] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_resetn0]
 
-connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk1]
-connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/saxihp0_fpd_aclk] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk1]
+connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk0]
+connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/saxihp0_fpd_aclk] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk0]
 
 connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk0]
 connect_bd_net [get_bd_pins Shell/main_shell/clk_266mhz] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk1]

@@ -22,7 +22,7 @@ set_property -dict [list CONFIG.FIFO_DEPTH {64}] [get_bd_cells Shell/pl_ps_bridg
 set_property -dict [list CONFIG.FIFO_DEPTH {64}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_5]
 set_property -dict [list CONFIG.FIFO_DEPTH {64}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_6]
 set_property -dict [list CONFIG.IS_ACLK_ASYNC {1}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_0]
-set_property -dict [list CONFIG.IS_ACLK_ASYNC {1}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_1]
+set_property -dict [list CONFIG.IS_ACLK_ASYNC {1} CONFIG.SYNCHRONIZATION_STAGES {4}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_1]
 set_property -dict [list CONFIG.IS_ACLK_ASYNC {1}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_2]
 set_property -dict [list CONFIG.IS_ACLK_ASYNC {1}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_3]
 set_property -dict [list CONFIG.IS_ACLK_ASYNC {1}] [get_bd_cells Shell/pl_ps_bridge/tx_path/axis_data_fifo_4]

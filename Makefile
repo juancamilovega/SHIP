@@ -1,6 +1,6 @@
 all: set_parameters hls gulf_stream storage_server bit_file binary device_tree
 
-no_outputs: set_half_parameters hls gulf_stream storage_server
+no_outputs: set_half_parameters hls driver_hls gulf_stream storage_server driver_proj
 
 driver_only: driver_hls gulf_stream driver_proj
 

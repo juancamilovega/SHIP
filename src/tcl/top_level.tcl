@@ -8,14 +8,11 @@ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 in
 create_bd_intf_port -mode Slave -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 gt_rx
 create_bd_intf_port -mode Master -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 gt_tx
 
+create_bd_intf_port -mode Master -vlnv xilinx.com:interface:pcie_7x_mgt_rtl:1.0 pcie_ports
+
 #configure external ports
 
 set_property CONFIG.FREQ_HZ 322265625 [get_bd_intf_ports /gt_ref]
-
-create_bd_port -dir I -from 3 -to 0 pci_exp_rxn
-create_bd_port -dir I -from 3 -to 0 pci_exp_rxp
-create_bd_port -dir O -from 3 -to 0 pci_exp_txn
-create_bd_port -dir O -from 3 -to 0 pci_exp_txp
 
 #create the cells
 create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 base_address
@@ -29,9 +26,6 @@ create_bd_cell -type hier roce_sector
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 Shell/pcie_clk
 
-create_bd_pin -dir I -from 3 -to 0 Shell/pci_exp_rxn
-create_bd_pin -dir I -from 3 -to 0 Shell/pci_exp_rxp
-
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/rrh_to_mem
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/data_storer_write_port
 
@@ -42,13 +36,13 @@ create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/sw_
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/sw_request_tx
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/mem_pages_free
 
-create_bd_pin -dir O -from 3 -to 0 Shell/pci_exp_txn
-create_bd_pin -dir O -from 3 -to 0 Shell/pci_exp_txp
 create_bd_pin -dir O Shell/pl_reset
 create_bd_pin -dir O Shell/reset_266mhz
 create_bd_pin -dir O Shell/clk_266mhz
 create_bd_pin -dir I Shell/clk_network
 create_bd_pin -dir I Shell/reset_network
+
+create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:pcie_7x_mgt_rtl:1.0 Shell/pcie_ports
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/tx_non_roce_meta
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 Shell/tx_non_roce_data
@@ -143,6 +137,7 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 read_se
 set_property -dict [list CONFIG.CONST_WIDTH {32} CONFIG.CONST_VAL {0}] [get_bd_cells base_address]
 
 #apply interface connections
+connect_bd_intf_net [get_bd_intf_ports pcie_ports] -boundary_type upper [get_bd_intf_pins Shell/pcie_ports]
 connect_bd_intf_net [get_bd_intf_ports gt_ref] -boundary_type upper [get_bd_intf_pins roce_sector/gt_ref]
 connect_bd_intf_net [get_bd_intf_ports init] -boundary_type upper [get_bd_intf_pins roce_sector/init]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins roce_sector/tx_interpreter_config] [get_bd_intf_pins Shell/tx_interpreter_config]
@@ -180,11 +175,6 @@ connect_bd_intf_net -boundary_type upper [get_bd_intf_pins read_sector/sw_reques
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins read_sector/mem_free] [get_bd_intf_pins Shell/mem_pages_free]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins read_sector/rrh_to_mem] [get_bd_intf_pins Shell/rrh_to_mem]
 #apply other connections
-
-connect_bd_net [get_bd_ports pci_exp_rxn] [get_bd_pins Shell/pci_exp_rxn]
-connect_bd_net [get_bd_ports pci_exp_rxp] [get_bd_pins Shell/pci_exp_rxp]
-connect_bd_net [get_bd_ports pci_exp_txn] [get_bd_pins Shell/pci_exp_txn]
-connect_bd_net [get_bd_ports pci_exp_txp] [get_bd_pins Shell/pci_exp_txp]
 
 connect_bd_net [get_bd_pins roce_sector/clk_network] [get_bd_pins Shell/clk_network] -boundary_type upper
 connect_bd_net [get_bd_pins roce_sector/reset_network] [get_bd_pins Shell/reset_network] -boundary_type upper

@@ -12,6 +12,8 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 Shell/PS_Master
 
 #make pins in hierarcy cells
 
+create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:pcie_7x_mgt_rtl:1.0 Shell/pcie_root_complex/pcie_ports
+
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pcie_root_complex/pcie_dma
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pcie_root_complex/PCIe_ctrl
@@ -19,14 +21,10 @@ create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pc
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 Shell/pcie_root_complex/pcie_clk
 
-create_bd_pin -dir I -from 3 -to 0 Shell/pcie_root_complex/pci_exp_rxn
-create_bd_pin -dir I -from 3 -to 0 Shell/pcie_root_complex/pci_exp_rxp
 create_bd_pin -dir I Shell/pcie_root_complex/clk_100mhz
 create_bd_pin -dir I Shell/pcie_root_complex/reset_100mhz
 create_bd_pin -dir I Shell/pcie_root_complex/global_reset
 
-create_bd_pin -dir O -from 3 -to 0 Shell/pcie_root_complex/pci_exp_txn
-create_bd_pin -dir O -from 3 -to 0 Shell/pcie_root_complex/pci_exp_txp
 create_bd_pin -dir O Shell/pcie_root_complex/interrupt_out
 create_bd_pin -dir O Shell/pcie_root_complex/interrupt_msi_low
 create_bd_pin -dir O Shell/pcie_root_complex/interrupt_msi_high
@@ -97,6 +95,8 @@ set_property -dict [list CONFIG.NUM_PORTS {6}] [get_bd_cells Shell/ps_interrupts
 set_property -dict [list CONFIG.NUM_MI {6} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M01_HAS_REGSLICE {1} CONFIG.M02_HAS_REGSLICE {1} CONFIG.M03_HAS_REGSLICE {1} CONFIG.S00_HAS_REGSLICE {3} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M04_HAS_REGSLICE {1} CONFIG.S00_HAS_REGSLICE {1} CONFIG.M05_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_Master]
 
 #connect the interfaces
+
+connect_bd_intf_net [get_bd_intf_pins Shell/pcie_ports] -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/pcie_ports]
 
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/main_shell/PS_Controller] [get_bd_intf_pins Shell/PS_Master/S00_AXI]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/main_shell/PS_DDR_Memory] [get_bd_intf_pins Shell/PS_DDR_INTERCONNECT/M00_AXI]
@@ -197,11 +197,6 @@ connect_bd_net [get_bd_pins Shell/main_shell/reset_266mhz] [get_bd_pins Shell/re
 
 connect_bd_net [get_bd_pins Shell/main_shell/global_reset] [get_bd_pins Shell/pcie_root_complex/global_reset] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/global_reset] [get_bd_pins Shell/pl_reset] -boundary_type upper
-
-connect_bd_net [get_bd_pins Shell/pci_exp_txn] [get_bd_pins Shell/pcie_root_complex/pci_exp_txn]
-connect_bd_net [get_bd_pins Shell/pci_exp_txp] [get_bd_pins Shell/pcie_root_complex/pci_exp_txp]
-connect_bd_net [get_bd_pins Shell/pci_exp_rxn] [get_bd_pins Shell/pcie_root_complex/pci_exp_rxn]
-connect_bd_net [get_bd_pins Shell/pci_exp_rxp] [get_bd_pins Shell/pcie_root_complex/pci_exp_rxp]
 
 connect_bd_net [get_bd_pins Shell/ps_interrupts/dout] [get_bd_pins Shell/main_shell/pl_ps_irq0]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/PS_PL_interrupt] [get_bd_pins Shell/ps_interrupts/In0]

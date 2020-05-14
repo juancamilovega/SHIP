@@ -19,7 +19,7 @@ set_property -dict [list CONFIG.C_BUF_TYPE {IBUFDSGTE}] [get_bd_cells Shell/pcie
 
 
 #connect interfaces
-
+connect_bd_intf_net [get_bd_intf_pins Shell/pcie_root_complex/xdma_0/pcie_mgt] -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/pcie_ports]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/PCIe_hub/M00_AXI] [get_bd_intf_pins Shell/pcie_root_complex/xdma_0/S_AXI_B]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/PCIe_hub/M01_AXI] [get_bd_intf_pins Shell/pcie_root_complex/xdma_0/S_AXI_LITE]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/cdma_interconnect/M00_AXI] [get_bd_intf_pins Shell/pcie_root_complex/mem_access/S00_AXI]
@@ -30,11 +30,6 @@ connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_compl
 connect_bd_intf_net [get_bd_intf_pins Shell/pcie_root_complex/pcie_clk] [get_bd_intf_pins Shell/pcie_root_complex/util_ds_buf_0/CLK_IN_D]
 connect_bd_intf_net [get_bd_intf_pins Shell/pcie_root_complex/PCIe_ctrl] -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/PCIe_hub/S00_AXI]
 connect_bd_intf_net [get_bd_intf_pins Shell/pcie_root_complex/pcie_dma] -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/mem_access/M00_AXI]
-
-connect_bd_net [get_bd_pins Shell/pcie_root_complex/pci_exp_txn] [get_bd_pins Shell/pcie_root_complex/xdma_0/pci_exp_txn]
-connect_bd_net [get_bd_pins Shell/pcie_root_complex/pci_exp_txp] [get_bd_pins Shell/pcie_root_complex/xdma_0/pci_exp_txp]
-connect_bd_net [get_bd_pins Shell/pcie_root_complex/pci_exp_rxn] [get_bd_pins Shell/pcie_root_complex/xdma_0/pci_exp_rxn]
-connect_bd_net [get_bd_pins Shell/pcie_root_complex/pci_exp_rxp] [get_bd_pins Shell/pcie_root_complex/xdma_0/pci_exp_rxp]
 
 #make other connections
 connect_bd_net [get_bd_pins Shell/pcie_root_complex/xdma_0/axi_aclk] [get_bd_pins Shell/pcie_root_complex/mem_access/S01_ACLK]

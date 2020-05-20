@@ -94,3 +94,6 @@ set_property offset 0x0400000000 [get_bd_addr_segs {Shell/pcie_root_complex/axi_
 set_property offset 0x0480000000 [get_bd_addr_segs {Shell/pcie_root_complex/axi_cdma_0/Data/SEG_xdma_0_CTL0}]
 set_property range 2G [get_bd_addr_segs {Shell/pcie_root_complex/axi_cdma_0/Data/SEG_xdma_0_BAR0}]
 set_property range 2G [get_bd_addr_segs {Shell/pcie_root_complex/axi_cdma_0/Data/SEG_xdma_0_CTL0}]
+assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP_CTRL/C0_REG }]
+assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK }]
+include_bd_addr_seg [get_bd_addr_segs -excluded Shell/pcie_root_complex/axi_cdma_0/Data/SEG_ddr4_hub_C0_REG]

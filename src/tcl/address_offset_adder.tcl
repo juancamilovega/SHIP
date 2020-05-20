@@ -57,3 +57,6 @@ assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/
 assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_QSPI }]
 assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM }]
 assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH }]
+assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP_CTRL/C0_REG }]
+assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK }]
+

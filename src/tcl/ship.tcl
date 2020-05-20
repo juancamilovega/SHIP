@@ -70,6 +70,8 @@ source $project_dir/src/tcl/shell.tcl
 
 source $project_dir/src/tcl/main_shell.tcl
 
+source $project_dir/src/tcl/ddr4.tcl
+
 source $project_dir/src/tcl/root_complex.tcl
 
 source $project_dir/src/tcl/shared_memory_subsystem.tcl

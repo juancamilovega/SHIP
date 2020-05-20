@@ -65,6 +65,10 @@ assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/
 assign_bd_address [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_HIGH }]
 include_bd_addr_seg [get_bd_addr_segs -excluded Shell/pl_ps_bridge/axi_dma/axi_dma_0/Data_SG/SEG_zynq_ultra_ps_e_0_HP0_LPS_OCM]
 include_bd_addr_seg [get_bd_addr_segs -excluded Shell/pl_ps_bridge/axi_dma/axi_dma_0/Data/SEG_zynq_ultra_ps_e_0_HP0_LPS_OCM]
+assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP_CTRL/C0_REG }]
+include_bd_addr_seg [get_bd_addr_segs -excluded Shell/pl_ps_bridge/axi_dma/axi_dma_0/Data_SG/SEG_ddr4_hub_C0_REG]
+include_bd_addr_seg [get_bd_addr_segs -excluded Shell/pl_ps_bridge/axi_dma/axi_dma_0/Data/SEG_ddr4_hub_C0_REG]
+assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK }]
 
 #patch the axidma bug of propagation, connect it like an interface, validate, and then connect it as individual ports so that the tdata value of 64 is propogated
 

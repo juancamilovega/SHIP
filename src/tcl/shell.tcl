@@ -27,6 +27,10 @@ create_bd_pin -dir O Shell/ddr4/reset_ddr
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:pcie_7x_mgt_rtl:1.0 Shell/pcie_root_complex/pcie_ports
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pcie_root_complex/pcie_dma
+create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pcie_root_complex/cdma_dma
+
+create_bd_pin -dir O Shell/pcie_root_complex/clk_pcie
+create_bd_pin -dir O Shell/pcie_root_complex/reset_pcie
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pcie_root_complex/PCIe_ctrl
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/pcie_root_complex/CDMA_ctrl
@@ -102,7 +106,7 @@ create_bd_pin -dir I Shell/shared_memory_subsystem/reset_266mhz
 
 #configure the cells
 
-set_property -dict [list CONFIG.NUM_SI {5} CONFIG.NUM_MI {2} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.S00_HAS_REGSLICE {1} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M01_HAS_REGSLICE {1} CONFIG.S01_HAS_REGSLICE {1} CONFIG.S02_HAS_REGSLICE {1} CONFIG.S03_HAS_REGSLICE {1} CONFIG.S04_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_DDR_INTERCONNECT]
+set_property -dict [list CONFIG.NUM_SI {6} CONFIG.NUM_MI {2} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {256} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.S00_HAS_REGSLICE {1} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M01_HAS_REGSLICE {1} CONFIG.S01_HAS_REGSLICE {1} CONFIG.S02_HAS_REGSLICE {1} CONFIG.S03_HAS_REGSLICE {1} CONFIG.S04_HAS_REGSLICE {1} CONFIG.S05_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_DDR_INTERCONNECT]
 set_property -dict [list CONFIG.NUM_PORTS {6}] [get_bd_cells Shell/ps_interrupts]
 set_property -dict [list CONFIG.NUM_MI {7} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {128} CONFIG.SYNCHRONIZATION_STAGES {5} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M01_HAS_REGSLICE {1} CONFIG.M02_HAS_REGSLICE {1} CONFIG.M03_HAS_REGSLICE {1} CONFIG.S00_HAS_REGSLICE {3} CONFIG.M00_HAS_REGSLICE {1} CONFIG.M04_HAS_REGSLICE {1} CONFIG.S00_HAS_REGSLICE {1} CONFIG.M05_HAS_REGSLICE {1} CONFIG.M06_HAS_REGSLICE {1}] [get_bd_cells Shell/PS_Master]
 
@@ -123,6 +127,7 @@ connect_bd_intf_net [get_bd_intf_pins Shell/pcie_clk] -boundary_type upper [get_
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/PCIe_ctrl] [get_bd_intf_pins Shell/PS_Master/M02_AXI]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/CDMA_ctrl] [get_bd_intf_pins Shell/PS_Master/M05_AXI]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/pcie_dma] [get_bd_intf_pins Shell/PS_DDR_INTERCONNECT/S02_AXI]
+connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/pcie_root_complex/cdma_dma] [get_bd_intf_pins Shell/PS_DDR_INTERCONNECT/S05_AXI]
 
 connect_bd_intf_net [get_bd_intf_pins Shell/mem_pages_free] -boundary_type upper [get_bd_intf_pins Shell/shared_memory_subsystem/free1]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/shared_memory_subsystem/free2] [get_bd_intf_pins Shell/pl_ps_bridge/free]
@@ -170,14 +175,18 @@ connect_bd_net [get_bd_pins Shell/main_shell/reset_266mhz] [get_bd_pins Shell/PS
 connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/ACLK] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/M00_ACLK] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S00_ACLK] -boundary_type upper
-connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S02_ACLK] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S03_ACLK] -boundary_type upper
+connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S05_ACLK] -boundary_type upper
+
+connect_bd_net [get_bd_pins Shell/pcie_root_complex/clk_pcie] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S02_ACLK] -boundary_type upper
 
 connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/ARESETN] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/M00_ARESETN] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S00_ARESETN] -boundary_type upper
-connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S02_ARESETN] -boundary_type upper
+connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S05_ARESETN] -boundary_type upper
 connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S03_ARESETN] -boundary_type upper
+
+connect_bd_net [get_bd_pins Shell/pcie_root_complex/reset_pcie] [get_bd_pins Shell/PS_DDR_INTERCONNECT/S02_ARESETN] -boundary_type upper
 
 connect_bd_net [get_bd_pins Shell/main_shell/clk_266mhz] [get_bd_pins Shell/PS_Master/M03_ACLK] -boundary_type upper
 

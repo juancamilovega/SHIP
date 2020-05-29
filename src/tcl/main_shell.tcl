@@ -24,8 +24,8 @@ connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/maxihpm0_fpd_aclk
 connect_bd_net [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/saxihp0_fpd_aclk] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk0]
 
 connect_bd_net [get_bd_pins Shell/main_shell/clk_100mhz] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk0]
-connect_bd_net [get_bd_pins Shell/main_shell/clk_266mhz] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk1]
+connect_bd_net [get_bd_pins Shell/main_shell/clk_200mhz] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_clk1]
 connect_bd_net [get_bd_pins Shell/main_shell/global_reset] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_resetn0]
 connect_bd_net [get_bd_pins Shell/main_shell/reset_100mhz] [get_bd_pins Shell/main_shell/proc_sys_reset_0/interconnect_aresetn]
-connect_bd_net [get_bd_pins Shell/main_shell/reset_266mhz] [get_bd_pins Shell/main_shell/proc_sys_reset_1/interconnect_aresetn]
+connect_bd_net [get_bd_pins Shell/main_shell/reset_200mhz] [get_bd_pins Shell/main_shell/proc_sys_reset_1/interconnect_aresetn]
 connect_bd_net [get_bd_pins Shell/main_shell/pl_ps_irq0] [get_bd_pins Shell/main_shell/zynq_ultra_ps_e_0/pl_ps_irq0]

@@ -1,5 +1,5 @@
 proc getPresetInfo {} {
-  return [dict create name {ps_preset} description {ps_preset}  vlnv xilinx.com:ip:zynq_ultra_ps_e:3.2 display_name {ps_preset} ]
+  return [dict create name {SHIP_hardware} description {SHIP_hardware}  vlnv xilinx.com:ip:zynq_ultra_ps_e:3.2 display_name {SHIP_hardware} ]
 }
 
 proc validate_preset {IPINST} { return true }
@@ -119,7 +119,7 @@ proc apply_preset {IPINST} {
     CONFIG.PSU__DDRC__EN_2ND_CLK {0}  \
     CONFIG.PSU__DDRC__PER_BANK_REFRESH {0}  \
     CONFIG.PSU__DDRC__ENABLE_LP4_SLOWBOOT {0}  \
-    CONFIG.PSU__DDRC__ENABLE_LP4_HAS_ECC_COMP {ERR: 0  | 1}  \
+    CONFIG.PSU__DDRC__ENABLE_LP4_HAS_ECC_COMP {ERR: 1  | 0}  \
     CONFIG.PSU__DDRC__DQMAP_0_3 {0}  \
     CONFIG.PSU__DDRC__DQMAP_4_7 {0}  \
     CONFIG.PSU__DDRC__DQMAP_8_11 {0}  \
@@ -333,7 +333,7 @@ proc apply_preset {IPINST} {
     CONFIG.PSU__CRF_APB__SATA_REF_CTRL__DIVISOR0 {5}  \
     CONFIG.PSU__CRF_APB__PCIE_REF_CTRL__DIVISOR0 {6}  \
     CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR0 {8}  \
-    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__DIVISOR0 {3}  \
+    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__DIVISOR0 {4}  \
     CONFIG.PSU__CRL_APB__PL2_REF_CTRL__DIVISOR0 {4}  \
     CONFIG.PSU__CRL_APB__PL3_REF_CTRL__DIVISOR0 {4}  \
     CONFIG.PSU__CRL_APB__PL0_REF_CTRL__DIVISOR1 {1}  \
@@ -464,7 +464,7 @@ proc apply_preset {IPINST} {
     CONFIG.PSU__DDR__INTERFACE__FREQMHZ {466.667}  \
     CONFIG.PSU__CRF_APB__GPU_REF_CTRL__ACT_FREQMHZ {599.994019}  \
     CONFIG.PSU__CRL_APB__PL0_REF_CTRL__ACT_FREQMHZ {99.999001}  \
-    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__ACT_FREQMHZ {266.664001}  \
+    CONFIG.PSU__CRL_APB__PL1_REF_CTRL__ACT_FREQMHZ {199.998001}  \
     CONFIG.PSU__CRF_APB__GDMA_REF_CTRL__ACT_FREQMHZ {599.994019}  \
     CONFIG.PSU__CRF_APB__DPDMA_REF_CTRL__ACT_FREQMHZ {599.994019}  \
     CONFIG.PSU__CRF_APB__TOPSW_MAIN_CTRL__ACT_FREQMHZ {466.661987}  \

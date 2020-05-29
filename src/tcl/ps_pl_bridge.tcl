@@ -36,8 +36,8 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/p
 
 create_bd_pin -dir I Shell/pl_ps_bridge/rx_path/clk_100mhz
 create_bd_pin -dir I Shell/pl_ps_bridge/rx_path/reset_100mhz
-create_bd_pin -dir I Shell/pl_ps_bridge/rx_path/clk_266mhz
-create_bd_pin -dir I Shell/pl_ps_bridge/rx_path/reset_266mhz
+create_bd_pin -dir I Shell/pl_ps_bridge/rx_path/clk_200mhz
+create_bd_pin -dir I Shell/pl_ps_bridge/rx_path/reset_200mhz
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/pl_ps_bridge/tx_path/tx_data_in
 
@@ -52,7 +52,7 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/p
 
 create_bd_pin -dir I Shell/pl_ps_bridge/tx_path/clk_100mhz
 create_bd_pin -dir I Shell/pl_ps_bridge/tx_path/reset_100mhz
-create_bd_pin -dir I Shell/pl_ps_bridge/tx_path/clk_266mhz
+create_bd_pin -dir I Shell/pl_ps_bridge/tx_path/clk_200mhz
 
 #connect interfaces
 
@@ -85,14 +85,14 @@ connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_100mhz] [get_bd_pins Shell/pl
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_100mhz] [get_bd_pins Shell/pl_ps_bridge/axi_dma/clk_100mhz]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_100mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_100mhz]
 
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_266mhz]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_200mhz]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz]
 
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/reset_100mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_100mhz]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/reset_100mhz] [get_bd_pins Shell/pl_ps_bridge/axi_dma/reset_100mhz]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/reset_100mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/reset_100mhz]
 
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/reset_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_266mhz]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/reset_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_200mhz]
 
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/PS_PL_interrupt] [get_bd_pins Shell/pl_ps_bridge/axi_dma/ps_pl_int]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/PL_PS_interrupt] [get_bd_pins Shell/pl_ps_bridge/axi_dma/pl_ps_int]

@@ -57,16 +57,16 @@ connect_bd_intf_net [get_bd_intf_pins Shell/pl_ps_bridge/rx_path/rx_data_out] [g
 
 #other connections
 
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_0/s_axis_aresetn]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_0/s_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_2/s_axis_aresetn]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_2/s_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_3/s_axis_aresetn]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_3/s_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_6/s_axis_aresetn]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_6/s_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_7/s_axis_aresetn]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_7/s_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_0/s_axis_aresetn]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_0/s_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_2/s_axis_aresetn]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_2/s_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_3/s_axis_aresetn]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_3/s_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_6/s_axis_aresetn]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_6/s_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/reset_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_7/s_axis_aresetn]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_7/s_axis_aclk]
 
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_100mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_0/m_axis_aclk]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/rx_path/clk_100mhz] [get_bd_pins Shell/pl_ps_bridge/rx_path/axis_data_fifo_2/m_axis_aclk]

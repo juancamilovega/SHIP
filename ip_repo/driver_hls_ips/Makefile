@@ -10,6 +10,7 @@ write_core: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 driver_tx: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -21,6 +22,7 @@ driver_tx: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 driver_rx: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -32,6 +34,7 @@ driver_rx: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 stream_meta_to_gulf:
 	rm -f Namefile.txt
@@ -43,6 +46,7 @@ stream_meta_to_gulf:
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 clean:
-	rm -rf write_core driver_tx driver_rx stream_meta_to_gulf
+	rm -rf write_core driver_tx driver_rx stream_meta_to_gulf Namefile.txt Speed_grade.txt

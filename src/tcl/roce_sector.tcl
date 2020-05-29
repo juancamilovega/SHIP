@@ -18,8 +18,8 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sec
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 roce_sector/roce_tx/tx_interpreter_config
 
-create_bd_pin -dir I roce_sector/roce_tx/clk_266mhz
-create_bd_pin -dir I roce_sector/roce_tx/reset_266mhz
+create_bd_pin -dir I roce_sector/roce_tx/clk_200mhz
+create_bd_pin -dir I roce_sector/roce_tx/reset_200mhz
 create_bd_pin -dir I -from 16 -to 0 roce_sector/roce_tx/roce_port
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/roce_rx/rx_data
@@ -31,8 +31,8 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sec
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/roce_rx/write_flag
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/roce_rx/write_data
 
-create_bd_pin -dir I roce_sector/roce_rx/clk_266mhz
-create_bd_pin -dir I roce_sector/roce_rx/reset_266mhz
+create_bd_pin -dir I roce_sector/roce_rx/clk_200mhz
+create_bd_pin -dir I roce_sector/roce_rx/reset_200mhz
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 roce_sector/udp_parser/gt_rx
 
@@ -53,8 +53,8 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sec
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/udp_parser/rx_nr_data
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/udp_parser/rx_nr_meta
 
-create_bd_pin -dir I roce_sector/udp_parser/clk_266mhz
-create_bd_pin -dir I roce_sector/udp_parser/reset_266mhz
+create_bd_pin -dir I roce_sector/udp_parser/clk_200mhz
+create_bd_pin -dir I roce_sector/udp_parser/reset_200mhz
 create_bd_pin -dir I roce_sector/udp_parser/global_reset
 create_bd_pin -dir I -from 16 -to 0 roce_sector/udp_parser/roce_port
 
@@ -102,13 +102,13 @@ connect_bd_net [get_bd_pins roce_sector/clk_network] [get_bd_pins roce_sector/ud
 
 connect_bd_net [get_bd_pins roce_sector/reset_network] [get_bd_pins roce_sector/udp_parser/reset_network]
 
-connect_bd_net [get_bd_pins roce_sector/clk_266mhz] [get_bd_pins roce_sector/roce_tx/clk_266mhz]
-connect_bd_net [get_bd_pins roce_sector/clk_266mhz] [get_bd_pins roce_sector/roce_rx/clk_266mhz]
-connect_bd_net [get_bd_pins roce_sector/clk_266mhz] [get_bd_pins roce_sector/udp_parser/clk_266mhz]
+connect_bd_net [get_bd_pins roce_sector/clk_200mhz] [get_bd_pins roce_sector/roce_tx/clk_200mhz]
+connect_bd_net [get_bd_pins roce_sector/clk_200mhz] [get_bd_pins roce_sector/roce_rx/clk_200mhz]
+connect_bd_net [get_bd_pins roce_sector/clk_200mhz] [get_bd_pins roce_sector/udp_parser/clk_200mhz]
 
-connect_bd_net [get_bd_pins roce_sector/reset_266mhz] [get_bd_pins roce_sector/roce_tx/reset_266mhz]
-connect_bd_net [get_bd_pins roce_sector/reset_266mhz] [get_bd_pins roce_sector/roce_rx/reset_266mhz]
-connect_bd_net [get_bd_pins roce_sector/reset_266mhz] [get_bd_pins roce_sector/udp_parser/reset_266mhz]
+connect_bd_net [get_bd_pins roce_sector/reset_200mhz] [get_bd_pins roce_sector/roce_tx/reset_200mhz]
+connect_bd_net [get_bd_pins roce_sector/reset_200mhz] [get_bd_pins roce_sector/roce_rx/reset_200mhz]
+connect_bd_net [get_bd_pins roce_sector/reset_200mhz] [get_bd_pins roce_sector/udp_parser/reset_200mhz]
 
 connect_bd_net [get_bd_pins roce_sector/roce_port/dout] [get_bd_pins roce_sector/roce_tx/roce_port]
 connect_bd_net [get_bd_pins roce_sector/roce_port/dout] [get_bd_pins roce_sector/udp_parser/roce_port]

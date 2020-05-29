@@ -79,12 +79,12 @@ connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/network_reset_syn
 
 connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/network_reset_sync/peripheral_reset] [get_bd_pins roce_sector/udp_parser/GULF_Stream/GULF_Stream/rst]
 
-#266mhz domain
+#200mhz domain
 
-connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_266mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_0/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_266mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1/m_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_200mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_0/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_200mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_1/m_axis_aclk]
 
-connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/reset_266mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_0/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/GULF_Stream/reset_200mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/axis_data_fifo_0/s_axis_aresetn]
 
 #connect input to gulf stream
 

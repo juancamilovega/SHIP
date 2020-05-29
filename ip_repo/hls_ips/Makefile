@@ -9,6 +9,7 @@ packet_length_counter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 write_signal_handler: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -20,6 +21,7 @@ write_signal_handler: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 write_organizer: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -31,6 +33,7 @@ write_organizer: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 data_storer: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -42,6 +45,7 @@ data_storer: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 verifier: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -53,6 +57,7 @@ verifier: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 data_reader: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -64,6 +69,7 @@ data_reader: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 rrrh: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -75,6 +81,7 @@ rrrh: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 ack_handler: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -86,6 +93,7 @@ ack_handler: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 roce_tx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -97,6 +105,7 @@ roce_tx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 roce_rx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -108,6 +117,7 @@ roce_rx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 udp_roce_rx_engine: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -119,6 +129,7 @@ udp_roce_rx_engine: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 udp_roce_tx_engine: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -130,6 +141,7 @@ udp_roce_tx_engine: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 fpga_malloc_free: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -141,6 +153,7 @@ fpga_malloc_free: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 data_stream_compressor: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -152,6 +165,7 @@ data_stream_compressor: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 data_stream_expander: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -163,6 +177,7 @@ data_stream_expander: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 udp_non_roce_rx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -174,6 +189,7 @@ udp_non_roce_rx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 udp_non_roce_tx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	rm -f Namefile.txt
@@ -185,6 +201,7 @@ udp_non_roce_tx_interpreter: ../../src/tcl/hls_builder.tcl ../../src/vhls/*
 	vivado_hls ../../src/tcl/hls_builder.tcl
 	rm -f vivado_hls.log
 	rm -f Namefile.txt
+	rm -f Speed_grade.txt
 
 clean:
-	rm -rf packet_length_counter udp_non_roce_tx_interpreter write_signal_handler write_organizer data_stream_compressor fpga_malloc_free roce_tx_interpreter udp_roce_tx_engine data_storer ack_handler verifier udp_non_roce_rx_interpreter data_reader rrrh Namefile.txt vivado_hls.log udp_roce_rx_engine roce_rx_interpreter data_stream_expander
+	rm -rf packet_length_counter udp_non_roce_tx_interpreter write_signal_handler write_organizer data_stream_compressor fpga_malloc_free roce_tx_interpreter udp_roce_tx_engine data_storer ack_handler verifier udp_non_roce_rx_interpreter data_reader rrrh Namefile.txt vivado_hls.log udp_roce_rx_engine roce_rx_interpreter data_stream_expander Namefile.txt Speed_grade.txt

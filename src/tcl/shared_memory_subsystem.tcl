@@ -11,8 +11,8 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/s
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/shared_memory_subsystem/address_offset_application/read_in
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:aximm_rtl:1.0 Shell/shared_memory_subsystem/address_offset_application/write_in
 
-create_bd_pin -dir I Shell/shared_memory_subsystem/address_offset_application/clk_266mhz
-create_bd_pin -dir I Shell/shared_memory_subsystem/address_offset_application/reset_266mhz
+create_bd_pin -dir I Shell/shared_memory_subsystem/address_offset_application/clk_200mhz
+create_bd_pin -dir I Shell/shared_memory_subsystem/address_offset_application/reset_200mhz
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/shared_memory_subsystem/shared_memory_allocator/malloc1
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/shared_memory_subsystem/shared_memory_allocator/malloc2
@@ -20,8 +20,8 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/s
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/shared_memory_subsystem/shared_memory_allocator/free1
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0  Shell/shared_memory_subsystem/shared_memory_allocator/free2
 
-create_bd_pin -dir I Shell/shared_memory_subsystem/shared_memory_allocator/clk_266mhz
-create_bd_pin -dir I Shell/shared_memory_subsystem/shared_memory_allocator/reset_266mhz
+create_bd_pin -dir I Shell/shared_memory_subsystem/shared_memory_allocator/clk_200mhz
+create_bd_pin -dir I Shell/shared_memory_subsystem/shared_memory_allocator/reset_200mhz
 create_bd_pin -dir I Shell/shared_memory_subsystem/shared_memory_allocator/clk_100mhz
 create_bd_pin -dir I Shell/shared_memory_subsystem/shared_memory_allocator/reset_100mhz
 
@@ -39,11 +39,11 @@ connect_bd_intf_net [get_bd_intf_pins Shell/shared_memory_subsystem/adjusted_wri
 
 #connect the other ports
 
-connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_266mhz]
-connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/clk_266mhz] [get_bd_pins Shell/shared_memory_subsystem/shared_memory_allocator/clk_266mhz]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/clk_200mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/clk_200mhz]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/clk_200mhz] [get_bd_pins Shell/shared_memory_subsystem/shared_memory_allocator/clk_200mhz]
 
-connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/shared_memory_allocator/reset_266mhz]
-connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/reset_266mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_266mhz]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/reset_200mhz] [get_bd_pins Shell/shared_memory_subsystem/shared_memory_allocator/reset_200mhz]
+connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/reset_200mhz] [get_bd_pins Shell/shared_memory_subsystem/address_offset_application/reset_200mhz]
 
 connect_bd_net [get_bd_pins Shell/shared_memory_subsystem/clk_100mhz] [get_bd_pins Shell/shared_memory_subsystem/shared_memory_allocator/clk_100mhz]
 

@@ -31,15 +31,15 @@ connect_bd_intf_net [get_bd_intf_pins roce_sector/roce_tx/tx_meta] [get_bd_intf_
 
 #other connections
 
-connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_266mhz] [get_bd_pins roce_sector/roce_tx/roce_tx_interpreter_0/aclk]
-connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_266mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_0/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_266mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_1/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_266mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_2/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_200mhz] [get_bd_pins roce_sector/roce_tx/roce_tx_interpreter_0/aclk]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_200mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_0/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_200mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_1/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/clk_200mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_2/s_axis_aclk]
 
-connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_266mhz] [get_bd_pins roce_sector/roce_tx/roce_tx_interpreter_0/aresetn]
-connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_266mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_0/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_266mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_1/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_266mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_2/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_200mhz] [get_bd_pins roce_sector/roce_tx/roce_tx_interpreter_0/aresetn]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_200mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_0/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_200mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_1/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/roce_tx/reset_200mhz] [get_bd_pins roce_sector/roce_tx/axis_data_fifo_2/s_axis_aresetn]
 
 connect_bd_net [get_bd_pins roce_sector/roce_tx/roce_port] [get_bd_pins roce_sector/roce_tx/roce_tx_interpreter_0/roce_port_V]
 

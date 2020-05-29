@@ -52,12 +52,12 @@ connect_bd_intf_net [get_bd_intf_pins Shell/pl_ps_bridge/tx_path/tx_non_roce_met
 
 #other connections
 
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_0/m_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_1/m_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_2/m_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_3/m_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_4/m_axis_aclk]
-connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_266mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_5/m_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_0/m_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_1/m_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_2/m_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_3/m_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_4/m_axis_aclk]
+connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_200mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_5/m_axis_aclk]
 
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_100mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_0/s_axis_aclk]
 connect_bd_net [get_bd_pins Shell/pl_ps_bridge/tx_path/clk_100mhz] [get_bd_pins Shell/pl_ps_bridge/tx_path/axis_data_fifo_1/s_axis_aclk]

@@ -25,8 +25,8 @@ create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sect
 
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 roce_sector/udp_parser/GULF_Stream/network_rx
 
-create_bd_pin -dir I roce_sector/udp_parser/GULF_Stream/clk_266mhz
-create_bd_pin -dir I roce_sector/udp_parser/GULF_Stream/reset_266mhz
+create_bd_pin -dir I roce_sector/udp_parser/GULF_Stream/clk_200mhz
+create_bd_pin -dir I roce_sector/udp_parser/GULF_Stream/reset_200mhz
 create_bd_pin -dir I roce_sector/udp_parser/GULF_Stream/global_reset
 
 create_bd_pin -dir O roce_sector/udp_parser/GULF_Stream/clk_network
@@ -77,25 +77,25 @@ connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_network] [get_bd_pins roc
 
 connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_network] [get_bd_pins roce_sector/udp_parser/GULF_Stream/reset_network]
 
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/udp_tx_engine/aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/udp_rx_engine/aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_266mhz]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_0/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_1/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_2/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_3/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_4/s_axis_aclk]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_5/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/udp_tx_engine/aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/udp_rx_engine/aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/clk_200mhz]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_0/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_1/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_2/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_3/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_4/s_axis_aclk]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/clk_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_5/s_axis_aclk]
 
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/udp_tx_engine/aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/udp_rx_engine/aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/reset_266mhz]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_0/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_1/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_2/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_3/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_4/s_axis_aresetn]
-connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_266mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_5/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/udp_tx_engine/aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/udp_rx_engine/aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/GULF_Stream/reset_200mhz]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_0/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_1/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_2/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_3/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_4/s_axis_aresetn]
+connect_bd_net [get_bd_pins roce_sector/udp_parser/reset_200mhz] [get_bd_pins roce_sector/udp_parser/axis_data_fifo_5/s_axis_aresetn]
 
 connect_bd_net [get_bd_pins roce_sector/udp_parser/global_reset] [get_bd_pins roce_sector/udp_parser/GULF_Stream/global_reset]
 

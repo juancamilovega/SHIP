@@ -27,15 +27,15 @@ connect_bd_intf_net [get_bd_intf_pins read_sector/rrh_to_mem] [get_bd_intf_pins 
 
 #other connections
 
-connect_bd_net [get_bd_pins read_sector/clk_266mhz] [get_bd_pins read_sector/data_reader_0/aclk]
-connect_bd_net [get_bd_pins read_sector/clk_266mhz] [get_bd_pins read_sector/rrrh_0/aclk]
-connect_bd_net [get_bd_pins read_sector/clk_266mhz] [get_bd_pins read_sector/axis_data_fifo_1/s_axis_aclk]
-connect_bd_net [get_bd_pins read_sector/clk_266mhz] [get_bd_pins read_sector/axis_data_fifo_0/s_axis_aclk]
+connect_bd_net [get_bd_pins read_sector/clk_200mhz] [get_bd_pins read_sector/data_reader_0/aclk]
+connect_bd_net [get_bd_pins read_sector/clk_200mhz] [get_bd_pins read_sector/rrrh_0/aclk]
+connect_bd_net [get_bd_pins read_sector/clk_200mhz] [get_bd_pins read_sector/axis_data_fifo_1/s_axis_aclk]
+connect_bd_net [get_bd_pins read_sector/clk_200mhz] [get_bd_pins read_sector/axis_data_fifo_0/s_axis_aclk]
 
-connect_bd_net [get_bd_pins read_sector/reset_266mhz] [get_bd_pins read_sector/data_reader_0/aresetn]
-connect_bd_net [get_bd_pins read_sector/reset_266mhz] [get_bd_pins read_sector/rrrh_0/aresetn]
-connect_bd_net [get_bd_pins read_sector/reset_266mhz] [get_bd_pins read_sector/axis_data_fifo_1/s_axis_aresetn]
-connect_bd_net [get_bd_pins read_sector/reset_266mhz] [get_bd_pins read_sector/axis_data_fifo_0/s_axis_aresetn]
+connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/data_reader_0/aresetn]
+connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/rrrh_0/aresetn]
+connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/axis_data_fifo_1/s_axis_aresetn]
+connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/axis_data_fifo_0/s_axis_aresetn]
 
 connect_bd_net [get_bd_pins read_sector/base_address] [get_bd_pins read_sector/data_reader_0/BASE_ADDR_V]
 

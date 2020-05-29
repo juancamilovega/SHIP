@@ -29,16 +29,16 @@ connect_bd_intf_net [get_bd_intf_pins ack_handler/ack_flags] [get_bd_intf_pins a
 
 #connect the other ports
 
-connect_bd_net [get_bd_pins ack_handler/clk_266mhz] [get_bd_pins ack_handler/axis_switch_0/aclk]
-connect_bd_net [get_bd_pins ack_handler/clk_266mhz] [get_bd_pins ack_handler/ack_handler_0/aclk]
-connect_bd_net [get_bd_pins ack_handler/clk_266mhz] [get_bd_pins ack_handler/axis_data_fifo_0/s_axis_aclk]
-connect_bd_net [get_bd_pins ack_handler/clk_266mhz] [get_bd_pins ack_handler/axis_data_fifo_1/s_axis_aclk]
-connect_bd_net [get_bd_pins ack_handler/clk_266mhz] [get_bd_pins ack_handler/axis_data_fifo_2/s_axis_aclk]
+connect_bd_net [get_bd_pins ack_handler/clk_200mhz] [get_bd_pins ack_handler/axis_switch_0/aclk]
+connect_bd_net [get_bd_pins ack_handler/clk_200mhz] [get_bd_pins ack_handler/ack_handler_0/aclk]
+connect_bd_net [get_bd_pins ack_handler/clk_200mhz] [get_bd_pins ack_handler/axis_data_fifo_0/s_axis_aclk]
+connect_bd_net [get_bd_pins ack_handler/clk_200mhz] [get_bd_pins ack_handler/axis_data_fifo_1/s_axis_aclk]
+connect_bd_net [get_bd_pins ack_handler/clk_200mhz] [get_bd_pins ack_handler/axis_data_fifo_2/s_axis_aclk]
 
-connect_bd_net [get_bd_pins ack_handler/reset_266mhz] [get_bd_pins ack_handler/axis_switch_0/aresetn]
-connect_bd_net [get_bd_pins ack_handler/reset_266mhz] [get_bd_pins ack_handler/ack_handler_0/aresetn]
-connect_bd_net [get_bd_pins ack_handler/reset_266mhz] [get_bd_pins ack_handler/axis_data_fifo_0/s_axis_aresetn]
-connect_bd_net [get_bd_pins ack_handler/reset_266mhz] [get_bd_pins ack_handler/axis_data_fifo_1/s_axis_aresetn]
-connect_bd_net [get_bd_pins ack_handler/reset_266mhz] [get_bd_pins ack_handler/axis_data_fifo_2/s_axis_aresetn]
+connect_bd_net [get_bd_pins ack_handler/reset_200mhz] [get_bd_pins ack_handler/axis_switch_0/aresetn]
+connect_bd_net [get_bd_pins ack_handler/reset_200mhz] [get_bd_pins ack_handler/ack_handler_0/aresetn]
+connect_bd_net [get_bd_pins ack_handler/reset_200mhz] [get_bd_pins ack_handler/axis_data_fifo_0/s_axis_aresetn]
+connect_bd_net [get_bd_pins ack_handler/reset_200mhz] [get_bd_pins ack_handler/axis_data_fifo_1/s_axis_aresetn]
+connect_bd_net [get_bd_pins ack_handler/reset_200mhz] [get_bd_pins ack_handler/axis_data_fifo_2/s_axis_aresetn]
 
 connect_bd_net [get_bd_pins ack_handler/three_bit_0/dout] [get_bd_pins ack_handler/axis_switch_0/s_req_suppress]

@@ -35,7 +35,10 @@ create_bd_design $project_name
 add_files -fileset constrs_1 -norecurse ${project_dir}/src/xdc/ship.xdc
 set_property  ip_repo_paths  {"${project_dir}/../ip_repo" "${project_dir}/../repos/GULF-Stream"} [current_project]
 update_ip_catalog -rebuild
-add_files -norecurse ${project_dir}/src/vhdl/add_top_32_addr.vhd
+#add_files -norecurse ${project_dir}/src/vhdl/add_top_32_addr.vhd
+add_files -norecurse ${project_dir}/src/vhdl/AXIF_TO_AXIS.vhd
+add_files -norecurse ${project_dir}/src/vhdl/AXIF_TO_AXIS_READ_ONLY.vhd
+#add_files -norecurse ${project_dir}/src/vhdl/AXIF_TO_AXIS_WRITE_ONLY.vhd
 update_compile_order -fileset sources_1
 open_bd_design {${project_dir}/SHIP_hardware.srcs/sources_1/bd/SHIP_hardware/SHIP_hardware.bd}
 source $project_dir/src/tcl/ps_pl_config.tcl
@@ -74,11 +77,11 @@ source $project_dir/src/tcl/ddr4.tcl
 
 source $project_dir/src/tcl/root_complex.tcl
 
-source $project_dir/src/tcl/shared_memory_subsystem.tcl
+#source $project_dir/src/tcl/shared_memory_subsystem.tcl
 
 source $project_dir/src/tcl/shared_memory_allocator.tcl
 
-source $project_dir/src/tcl/address_offset_adder.tcl
+#source $project_dir/src/tcl/address_offset_adder.tcl
 
 source $project_dir/src/tcl/ps_pl_bridge.tcl
 

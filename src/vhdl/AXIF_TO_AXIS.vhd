@@ -31,7 +31,6 @@ entity AXIF_TO_AXIS is
         m_axi_awready : in std_logic;
         
         AW_tdata: in std_logic_vector(71 downto 0);
-        AW_tdest: in std_logic_vector(ID_WIDTH-1 downto 0);
         AW_tvalid: in std_logic;
         AW_tready: out std_logic;
         -- AW_tid: in std_logic_vector(ID_WIDTH-1 downto 0); --uncomment to use tid for ID data

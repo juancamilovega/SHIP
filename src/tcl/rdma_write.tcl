@@ -98,7 +98,7 @@ connect_bd_net [get_bd_pins write_sector/reset_200mhz] [get_bd_pins write_sector
 connect_bd_net [get_bd_pins write_sector/reset_200mhz] [get_bd_pins write_sector/ack_fifo/s_axis_aresetn]
 connect_bd_net [get_bd_pins write_sector/reset_200mhz] [get_bd_pins write_sector/batch_fifo/s_axis_aresetn]
 
-connect_bd_net [get_bd_pins write_sector/base_address] [get_bd_pins write_sector/data_storer/BASE_ADDR_V]
+connect_bd_net [get_bd_pins write_sector/base_address] [get_bd_pins write_sector/data_storer/TOP_ADDR_V]
 
 
 #set the address

@@ -52,7 +52,7 @@ connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/A
 connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/axis_data_fifo_1/s_axis_aresetn]
 connect_bd_net [get_bd_pins read_sector/reset_200mhz] [get_bd_pins read_sector/axis_data_fifo_0/s_axis_aresetn]
 
-connect_bd_net [get_bd_pins read_sector/base_address] [get_bd_pins read_sector/data_reader/BASE_ADDR_V]
+connect_bd_net [get_bd_pins read_sector/base_address] [get_bd_pins read_sector/data_reader/TOP_ADDR_V]
 
 #set the addresses
 

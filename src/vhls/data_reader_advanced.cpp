@@ -12,7 +12,7 @@
 //#define FULL_KEEP (1<<(EXT_KEEP)) - 1
 #define FULL_KEEP 0xFFFFFFFFFFFFFFFF
 #define CONTAINER_SHIFT 20
-
+#define TOP_WIDTH (AXI_ADDR_WIDTH-CONT_FIFO_DATA_WIDTH-CONTAINER_SHIFT)
 #define WAITING_FOR_INSTRUCTIONS 0
 #define SENDING_REQUEST 1
 #define TRANSFERING 2
@@ -103,7 +103,7 @@ void data_reader_advanced(
 	hls::stream<flags>& read_flags,
 	hls::stream<aeth>& rdma_read_aeth,
 	//ap_uint<6> CONTAINER_SHIFT,
-	ap_uint<AXI_ADDR_WIDTH> BASE_ADDR,
+	ap_uint<TOP_WIDTH> TOP_ADDR,
 	hls::stream<address_axi_chan>& mem_ar,
 	hls::stream<read_dataword>& mem_r,
 	hls::stream<ap_uint<CONT_FIFO_DATA_WIDTH> >& cont_fifo_data
@@ -146,7 +146,7 @@ void data_reader_advanced(
 	static ap_uint<AXI4_LEN_BITS> length_left = 0;
 	static ap_uint<AXI_ADDR_WIDTH-FLIT_ADDR_WIDTH> num_slices = 0;
 	static ap_uint<AXI_ADDR_WIDTH> offset;
-	static ap_uint<AXI_ADDR_WIDTH> start_addr;
+	static ap_uint<CONT_FIFO_DATA_WIDTH> container_addr;
 	static ap_uint<64> true_size;
 	static ap_uint<EXT_KEEP> last_keep=0;
 	flags flags_out;
@@ -155,7 +155,7 @@ void data_reader_advanced(
 	dataword_ext data_out;
 	read_dataword data_in;
 	ap_uint<AXI_ADDR_WIDTH-FLIT_ADDR_WIDTH> num_slices_temp;
-	ap_uint<64> address_temp;
+	ap_uint<CONT_FIFO_DATA_WIDTH+CONTAINER_SHIFT> address_temp;
 	ap_uint<FLIT_ADDR_WIDTH> remainder;
 	ap_uint<64> size_left;
 	ap_uint<2> temp_padding;
@@ -167,8 +167,6 @@ void data_reader_advanced(
 			//get the instruction
 			data_info_in=from_rrrh.read();
 			//Find the start address of the container
-			address_temp.range(AXI_ADDR_WIDTH-1,CONTAINER_SHIFT)= data_info_in.container_number;
-			address_temp.range(CONTAINER_SHIFT,0)= 0;
 			aeth_out.MSN=data_info_in.packet_sequence_number;
 			aeth_out.syndrome=0x1F;
 
@@ -194,8 +192,7 @@ void data_reader_advanced(
 				flags_out.payload_length=data_info_in.size+temp_padding;
 			}
 			flags_out.solicited_event=0;
-
-			start_addr = BASE_ADDR+address_temp;
+			container_addr= data_info_in.container_number;
 			stage = SENDING_REQUEST;
 			offset = 0;
 			read_flags.write(flags_out);
@@ -212,7 +209,9 @@ void data_reader_advanced(
 			size_left = true_size - offset;//calculate the number of bytes left to write
 			num_slices_temp=true_size.range(AXI_ADDR_WIDTH-1,FLIT_ADDR_WIDTH);//Number of flits in the whole transaction rounded down
 			remainder=true_size.range(FLIT_ADDR_WIDTH-1,0);//Number of extra bytes in the last flit
-			temp_addr.address=start_addr + offset;//address of the next burst
+			temp_addr.address.range(AXI_ADDR_WIDTH-1,AXI_ADDR_WIDTH-TOP_WIDTH)=TOP_ADDR;//address of the next burst
+			temp_addr.address.range(AXI_ADDR_WIDTH-TOP_WIDTH-1,AXI_ADDR_WIDTH-TOP_WIDTH-CONT_FIFO_DATA_WIDTH)=container_addr;
+			temp_addr.address.range(AXI_ADDR_WIDTH-TOP_WIDTH-CONT_FIFO_DATA_WIDTH-1,0)=offset;
 			if (size_left.range(AXI_ADDR_WIDTH-1,BIGGEST_BURST) != 0)
 			{
 				//size left is greater than the max burst size

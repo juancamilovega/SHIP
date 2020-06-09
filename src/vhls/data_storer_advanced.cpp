@@ -1,7 +1,7 @@
 #include "hls_stream.h"
 #include "ap_int.h"
 #include "ap_utils.h"
-
+#define instructable_bits 36
 //#define DEBUG
 
 #define WAITING_FOR_INSTRUCTIONS 0x0
@@ -88,7 +88,7 @@ void data_storer_advanced(
 	hls::stream<address_axi_chan>& mem_aw,
 	hls::stream<read_dataword>& mem_r,
 	hls::stream<dataword>& mem_w,
-	ap_uint<64> BASE_ADDR
+	ap_uint<64-instructable_bits> TOP_ADDR
 	)
 {
 
@@ -118,7 +118,7 @@ void data_storer_advanced(
 #pragma HLS DATA_PACK variable=mem_w
 
 	static ap_uint<8> stage = WAITING_FOR_INSTRUCTIONS;
-	static ap_uint<64> address=0;
+	static ap_uint<instructable_bits> address=0;
 	static ap_uint<32> space_left=0;
 	static ap_uint<8> disalignment=0;
 	static ap_uint<64> offset = 0;
@@ -150,7 +150,7 @@ void data_storer_advanced(
 			else
 			{
 				//find the address we are writing to and record the parameters. Determine if the access is disaligned
-				address = BASE_ADDR+inst.mem_write_start_addr;
+				address=inst.mem_write_start_addr.range(instructable_bits-1,0);
 				space_left = inst.max_write_size;
 				disalignment= inst.mem_write_start_addr%64;
 				if (inst.mem_write_start_addr%64==0)
@@ -174,7 +174,7 @@ void data_storer_advanced(
 			//Instructions are here and either we are able to initiate a new burst or we still have no data to send (last buffer was finished)
 			inst = instructions.read();
 			//Get omfp
-			address = BASE_ADDR+inst.mem_write_start_addr;
+			address=inst.mem_write_start_addr.range(instructable_bits-1,0);
 			space_left = inst.max_write_size;
 			if (number_in_buffer==0)
 			{
@@ -186,7 +186,8 @@ void data_storer_advanced(
 				//We can not fit the full buffer, we will send a length of the max we can send
 				stage = PASSING_PACKET;
 				addr_info.length=inst.max_write_size/64-1;
-				addr_info.address=BASE_ADDR+inst.mem_write_start_addr;
+				addr_info.address.range(63,instructable_bits) = TOP_ADDR;
+				addr_info.address.range(instructable_bits-1,0)=inst.mem_write_start_addr.range(instructable_bits-1,0);
 				mem_aw.write(addr_info);
 			}
 			else
@@ -194,7 +195,8 @@ void data_storer_advanced(
 				//the full buffer can be sent so an instruction is sent for it.
 				stage = PASSING_PACKET;
 				addr_info.length=number_in_buffer-1;
-				addr_info.address=BASE_ADDR+inst.mem_write_start_addr;
+				addr_info.address.range(63,instructable_bits) = TOP_ADDR;
+				addr_info.address.range(instructable_bits-1,0)=inst.mem_write_start_addr.range(instructable_bits-1,0);
 				mem_aw.write(addr_info);
 			}
 			offset = 0;
@@ -204,19 +206,21 @@ void data_storer_advanced(
 		if (!instructions.empty() && (!mem_aw.full() || number_in_buffer==0))
 		{
 			inst = instructions.read();
-			address = BASE_ADDR+inst.mem_write_start_addr;
+			address=inst.mem_write_start_addr.range(instructable_bits-1,0);
 			space_left = inst.max_write_size - disalignment;//The left over from last time consumes a bit of room we need to subtract from max write size
 			offset = 0;
 			if (number_in_buffer != 0 && ((inst.max_write_size - disalignment) < 64 * number_in_buffer))
 			{
 				addr_info.length=inst.max_write_size/64-1;
-				addr_info.address=BASE_ADDR+inst.mem_write_start_addr;
+				addr_info.address.range(63,instructable_bits) = TOP_ADDR;
+				addr_info.address.range(instructable_bits-1,0)=inst.mem_write_start_addr.range(instructable_bits-1,0);
 				mem_aw.write(addr_info);
 			}
 			else if (number_in_buffer != 0)
 			{
 				addr_info.length=number_in_buffer-1;
-				addr_info.address=BASE_ADDR+inst.mem_write_start_addr;
+				addr_info.address.range(63,instructable_bits) = TOP_ADDR;
+				addr_info.address.range(instructable_bits-1,0)=inst.mem_write_start_addr.range(instructable_bits-1,0);
 				mem_aw.write(addr_info);
 			}
 			stage = DISALIGNED_PASSING_PACKET;
@@ -232,7 +236,8 @@ void data_storer_advanced(
 			//All the data is significant
 			data_to_write.keep=0xffffffffffffffff;
 			batch_read = batch_in.read();
-			addr_info.address=address + offset;
+			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+			addr_info.address.range(instructable_bits-1,0)=address + offset;
 			done_msg.expect_done_sig=1;
 			if (data_read.last == 1)
 			{
@@ -292,7 +297,8 @@ void data_storer_advanced(
 		{
 			//Data is not ready to send or AXIF not ready for more. In either case just read the batch info
 			batch_read = batch_in.read();
-			addr_info.address=address + offset;
+			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+			addr_info.address.range(instructable_bits-1,0)=address + offset;
 			//Get the smaller of space left or length as the number to send in AXIF
 			if (space_left < 64 * batch_read)
 			{
@@ -428,7 +434,8 @@ void data_storer_advanced(
 		if (!mem_ar.full())
 		{
 			//Send a read request at the aligned rounded down address so we can overwrite the end of it
-			addr_info.address=address - disalignment;
+			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+			addr_info.address.range(instructable_bits-1,0)=address - disalignment;
 			addr_info.length=0;
 			mem_ar.write(addr_info);
 			stage = WAITING_FOR_READ_REPLY;
@@ -444,7 +451,8 @@ void data_storer_advanced(
 			if (rdw.dest>1)
 			{
 				//Indicates error (recall I hacked .dest to be RResp which is 00 or 01 on success, 10 or 11 on failure. Here it failed so ask again
-				addr_info.address=address;
+				addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+				addr_info.address.range(instructable_bits-1,0)=address;
 				addr_info.length=0;
 				mem_ar.write(addr_info);
 				stage = WAITING_FOR_READ_REPLY;
@@ -463,7 +471,8 @@ void data_storer_advanced(
 		{
 			//no data is ready but batch is to send request
 			batch_read = batch_in.read();
-			addr_info.address=address + offset;
+			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+			addr_info.address.range(instructable_bits-1,0)=address + offset;
 			//Find smaller of space left or batch available and say the burst is that length
 			if (space_left < 64 * batch_read - disalignment)
 			{
@@ -489,7 +498,8 @@ void data_storer_advanced(
 			{
 				//Buffer is done but a batch is ready. Read it, figure out address, and send it.
 				number_in_buffer_temp = batch_in.read();
-				addr_info.address=address + offset;
+				addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+				addr_info.address.range(instructable_bits-1,0)=address + offset;
 				if (space_left < 64 * number_in_buffer_temp - disalignment)
 				{
 					addr_info.length=(space_left+disalignment)/64-1;
@@ -843,7 +853,8 @@ void data_storer_advanced(
 		else if(!mem_w.full() && (!mem_aw.full() || mem_is_informed == 1))
 		{
 			//We can fit the last bit of data and AXI is either aware of this flit comming or able to get more instructions
-			addr_info.address=address + offset;
+			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+			addr_info.address.range(instructable_bits-1,0)=address + offset;
 			addr_info.length=0;
 			//We will send a done from this mem access
 			done_msg.send_done_sig=1;
@@ -1132,6 +1143,8 @@ void data_storer_advanced(
 		else if (!mem_aw.full() && mem_is_informed==0)
 		{
 			//We have space to inform even if it is not ready to receive so inform it
+			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
+			addr_info.address.range(instructable_bits-1,0)=address + offset;
 			addr_info.address=address + offset;
 			addr_info.length=0;
 			mem_aw.write(addr_info);

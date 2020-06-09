@@ -110,7 +110,7 @@ create_bd_pin -dir I roce_sector/reset_global
 
 create_bd_pin -dir I write_sector/clk_200mhz
 create_bd_pin -dir I write_sector/reset_200mhz
-create_bd_pin -dir I -from 63 -to 0 write_sector/base_address
+create_bd_pin -dir I -from 27 -to 0 write_sector/base_address
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 write_sector/malloc
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 write_sector/change_queue
@@ -126,7 +126,7 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 write_s
 
 create_bd_pin -dir I read_sector/clk_200mhz
 create_bd_pin -dir I read_sector/reset_200mhz
-create_bd_pin -dir I -from 63 -to 0 read_sector/base_address
+create_bd_pin -dir I -from 27 -to 0 read_sector/base_address
 
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 read_sector/request
 create_bd_intf_pin -mode Slave -vlnv xilinx.com:interface:axis_rtl:1.0 read_sector/flags
@@ -143,7 +143,7 @@ create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:axis_rtl:1.0 read_sec
 create_bd_intf_pin -mode Master -vlnv xilinx.com:interface:aximm_rtl:1.0 read_sector/rrh_to_mem
 
 #configure blocks
-set_property -dict [list CONFIG.CONST_WIDTH {64} CONFIG.CONST_VAL {0x1000000000}] [get_bd_cells base_address]
+set_property -dict [list CONFIG.CONST_WIDTH {28} CONFIG.CONST_VAL {1}] [get_bd_cells base_address]
 
 #apply interface connections
 connect_bd_intf_net [get_bd_intf_ports ddr_clk_DS] -boundary_type upper [get_bd_intf_pins Shell/ddr_clk]

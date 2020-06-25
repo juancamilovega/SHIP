@@ -8,7 +8,7 @@ create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:diff_clock_rtl:1.0 in
 
 create_bd_intf_port -mode Slave -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 gt_rx
 
-create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddr4_rtl:1.0 C0_DDR4
+create_bd_intf_port -mode Master -vlnv xilinx.com:interface:ddr4_rtl:1.0 C0_DDR4_0
 
 create_bd_intf_port -mode Master -vlnv xilinx.com:display_cmac_usplus:gt_ports:2.0 gt_tx
 
@@ -147,7 +147,7 @@ set_property -dict [list CONFIG.CONST_WIDTH {28} CONFIG.CONST_VAL {1}] [get_bd_c
 
 #apply interface connections
 connect_bd_intf_net [get_bd_intf_ports ddr_clk_DS] -boundary_type upper [get_bd_intf_pins Shell/ddr_clk]
-connect_bd_intf_net [get_bd_intf_ports C0_DDR4] -boundary_type upper [get_bd_intf_pins Shell/ddr4]
+connect_bd_intf_net [get_bd_intf_ports C0_DDR4_0] -boundary_type upper [get_bd_intf_pins Shell/ddr4]
 connect_bd_intf_net [get_bd_intf_ports pcie_ports] -boundary_type upper [get_bd_intf_pins Shell/pcie_ports]
 connect_bd_intf_net [get_bd_intf_ports gt_ref] -boundary_type upper [get_bd_intf_pins roce_sector/gt_ref]
 connect_bd_intf_net [get_bd_intf_ports init] -boundary_type upper [get_bd_intf_pins roce_sector/init]

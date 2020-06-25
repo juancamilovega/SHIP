@@ -11,7 +11,7 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 Shell/ddr4/ddr_rs
 
 set_property -dict [list CONFIG.C_SIZE {1} CONFIG.C_OPERATION {not} CONFIG.LOGO_FILE {data/sym_notgate.png}] [get_bd_cells Shell/ddr4/polarity_flipper]
 
-set_property -dict [list CONFIG.C0.DDR4_TimePeriod {938} CONFIG.C0.DDR4_InputClockPeriod {3001} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {5} CONFIG.C0.DDR4_MemoryType {SODIMMs} CONFIG.C0.DDR4_MemoryPart {MTA18ASF1G72HZ-2G3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_CasLatency {15} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {33} CONFIG.C0.CK_WIDTH {2} CONFIG.C0.CKE_WIDTH {2} CONFIG.C0.CS_WIDTH {2} CONFIG.C0.ODT_WIDTH {2}] [get_bd_cells Shell/ddr4/ddr4_hub]
+set_property -dict [list CONFIG.C0.DDR4_TimePeriod {938} CONFIG.C0.DDR4_InputClockPeriod {3001} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {5} CONFIG.C0.DDR4_MemoryType {SODIMMs} CONFIG.C0.DDR4_MemoryPart {MTA16ATF2G64HZ-2G3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_CasLatency {15} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {33} CONFIG.C0.CK_WIDTH {2} CONFIG.C0.CKE_WIDTH {2} CONFIG.C0.CS_WIDTH {2} CONFIG.C0.ODT_WIDTH {2}] [get_bd_cells Shell/ddr4/ddr4_hub]
 
 set_property -dict [list CONFIG.NUM_SI {2} CONFIG.NUM_MI {1} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {512} CONFIG.SYNCHRONIZATION_STAGES {5}] [get_bd_cells Shell/ddr4/ddr_inter]
 

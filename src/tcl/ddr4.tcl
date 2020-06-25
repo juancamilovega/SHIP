@@ -11,7 +11,7 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:proc_sys_reset:5.0 Shell/ddr4/ddr_rs
 
 set_property -dict [list CONFIG.C_SIZE {1} CONFIG.C_OPERATION {not} CONFIG.LOGO_FILE {data/sym_notgate.png}] [get_bd_cells Shell/ddr4/polarity_flipper]
 
-set_property -dict [list CONFIG.C0.DDR4_TimePeriod {938} CONFIG.C0.DDR4_InputClockPeriod {3001} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {5} CONFIG.C0.DDR4_MemoryType {SODIMMs} CONFIG.C0.DDR4_MemoryPart {MTA16ATF2G64HZ-2G3} CONFIG.C0.DDR4_DataWidth {72} CONFIG.C0.DDR4_DataMask {NO_DM_NO_DBI} CONFIG.C0.DDR4_Ecc {true} CONFIG.C0.DDR4_CasLatency {15} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {33} CONFIG.C0.CK_WIDTH {2} CONFIG.C0.CKE_WIDTH {2} CONFIG.C0.CS_WIDTH {2} CONFIG.C0.ODT_WIDTH {2}] [get_bd_cells Shell/ddr4/ddr4_hub]
+set_property -dict [list CONFIG.C0.DDR4_TimePeriod {938} CONFIG.C0.DDR4_InputClockPeriod {3001} CONFIG.C0.DDR4_CLKOUT0_DIVIDE {5} CONFIG.C0.DDR4_MemoryType {SODIMMs} CONFIG.C0.DDR4_MemoryPart {MTA16ATF2G64HZ-2G3} CONFIG.C0.DDR4_DataWidth {64} CONFIG.C0.DDR4_CasLatency {15} CONFIG.C0.DDR4_AxiDataWidth {512} CONFIG.C0.DDR4_AxiAddressWidth {34} CONFIG.C0.CK_WIDTH {2} CONFIG.C0.CKE_WIDTH {2} CONFIG.C0.CS_WIDTH {2} CONFIG.C0.ODT_WIDTH {2}] [get_bd_cells Shell/ddr4/ddr4_hub]
 
 set_property -dict [list CONFIG.NUM_SI {2} CONFIG.NUM_MI {1} CONFIG.ENABLE_ADVANCED_OPTIONS {1} CONFIG.XBAR_DATA_WIDTH {512} CONFIG.SYNCHRONIZATION_STAGES {5}] [get_bd_cells Shell/ddr4/ddr_inter]
 
@@ -24,7 +24,6 @@ connect_bd_intf_net [get_bd_intf_pins Shell/ddr4/ddr4] [get_bd_intf_pins Shell/d
 connect_bd_intf_net [get_bd_intf_pins Shell/ddr4/mem_1] -boundary_type upper [get_bd_intf_pins Shell/ddr4/ddr_inter/S00_AXI]
 connect_bd_intf_net [get_bd_intf_pins Shell/ddr4/mem_2] -boundary_type upper [get_bd_intf_pins Shell/ddr4/ddr_inter/S01_AXI]
 
-connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/ddr4/ddr_ctrl] [get_bd_intf_pins Shell/ddr4/ddr4_hub/C0_DDR4_S_AXI_CTRL]
 connect_bd_intf_net -boundary_type upper [get_bd_intf_pins Shell/ddr4/ddr_inter/M00_AXI] [get_bd_intf_pins Shell/ddr4/ddr4_hub/C0_DDR4_S_AXI]
 
 #connect the other pins
@@ -50,9 +49,6 @@ connect_bd_net [get_bd_pins Shell/ddr4/ddr_rst_hub/interconnect_aresetn] [get_bd
 
 #set the addresses
 
-assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP_CTRL/C0_REG }]
 assign_bd_address [get_bd_addr_segs {Shell/ddr4/ddr4_hub/C0_DDR4_MEMORY_MAP/C0_DDR4_ADDRESS_BLOCK }]
-set_property offset 0x00A0100000 [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/Data/SEG_ddr4_hub_C0_REG}]
 set_property offset 0x1000000000 [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/Data/SEG_ddr4_hub_C0_DDR4_ADDRESS_BLOCK}]
-set_property range 4K [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/Data/SEG_ddr4_hub_C0_REG}]
-set_property range 8G [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/Data/SEG_ddr4_hub_C0_DDR4_ADDRESS_BLOCK}]
+set_property range 16G [get_bd_addr_segs {Shell/main_shell/zynq_ultra_ps_e_0/Data/SEG_ddr4_hub_C0_DDR4_ADDRESS_BLOCK}]

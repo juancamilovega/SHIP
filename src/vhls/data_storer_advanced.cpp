@@ -1145,7 +1145,6 @@ void data_storer_advanced(
 			//We have space to inform even if it is not ready to receive so inform it
 			addr_info.address.range(63,instructable_bits)=TOP_ADDR;
 			addr_info.address.range(instructable_bits-1,0)=address + offset;
-			addr_info.address=address + offset;
 			addr_info.length=0;
 			mem_aw.write(addr_info);
 			//Expect a done but don't send it until we have sent the data
